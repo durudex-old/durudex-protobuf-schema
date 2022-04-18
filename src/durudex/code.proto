@@ -9,9 +9,11 @@ syntax = "proto3";
 
 package durudex;
 
+import "src/durudex/types/status.proto";
+
 service CodeService {
-  rpc GetCodeByEmail(Email) returns (Email);
-  rpc CreateCodeByEmail(Email) returns (Code);
+  rpc GetCodeByEmail(Email) returns (Code);
+  rpc CreateCodeByEmail(Email) returns (types.Status);
 }
 
 message Email {
