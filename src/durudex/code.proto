@@ -1,0 +1,23 @@
+/*
+ * Copyright © 2022 Durudex
+
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+syntax = "proto3";
+
+package durudex;
+
+service CodeService {
+  rpc GetCodeByEmail(Email) returns (Email);
+  rpc CreateCodeByEmail(Email) returns (Code);
+}
+
+message Email {
+  string email = 1;
+}
+
+message Code {
+  uint64 code = 1;
+}

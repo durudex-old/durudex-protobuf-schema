@@ -1,0 +1,42 @@
+/*
+ * Copyright © 2022 Durudex
+
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+syntax = "proto3";
+
+package durudex;
+
+import "src/durudex/types/status.proto";
+import "src/durudex/types/uuid.proto";
+
+service AuthService {
+  rpc SignUp(SignUpRequest) returns (types.UUID);
+  rpc SignIn(SignInRequest) returns (Tokens);
+  rpc RefreshTokens(RefreshTokenRequest) returns (Tokens);
+  rpc Logout(RefreshTokenRequest) returns (types.Status);
+}
+
+message SignUpRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message SignInRequest {
+  string username = 1;
+  string password = 2;
+  string ip = 3;
+}
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+  string ip = 2;
+}
+
+message Tokens {
+  string access = 1;
+  string refresh = 2;
+}

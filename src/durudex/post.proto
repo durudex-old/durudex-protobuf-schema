@@ -1,0 +1,30 @@
+/*
+ * Copyright © 2022 Durudex
+
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+syntax = "proto3";
+
+package durudex;
+
+import "google/protobuf/timestamp.proto";
+import "src/durudex/types/uuid.proto";
+
+service PostService {
+  rpc CreatePost(CreatePostRequest) returns (types.UUID);
+  rpc GetPostByID(types.UUID) returns (Post);
+}
+
+message Post {
+  bytes id = 1;
+  bytes author_id = 2;
+  string text = 3;
+  google.protobuf.Timestamp created_at = 4;
+  optional google.protobuf.Timestamp updated_at = 5;
+}
+
+message CreatePostRequest {
+  string text = 1;
+}

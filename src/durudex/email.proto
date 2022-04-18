@@ -1,0 +1,34 @@
+/*
+ * Copyright © 2022 Durudex
+
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+syntax = "proto3";
+
+package durudex;
+
+import "src/durudex/types/status.proto";
+
+service EmailService {
+  rpc SendEmailUserCode(SendEmailUserCodeRequest) returns (types.Status);
+  rpc SendEmailUserLoggedIn(SendEmailUserLoggedInRequest) returns (types.Status);
+  rpc SendEmailUserRegister(SendEmailUserRegisterRequest) returns (types.Status);
+}
+
+message SendEmailUserCodeRequest {
+  string email = 1;
+  string username = 2;
+  uint64 code = 3;
+}
+
+message SendEmailUserLoggedInRequest {
+  string email = 1;
+  string ip = 2;
+}
+
+message SendEmailUserRegisterRequest {
+  string email = 1;
+  string username = 2;
+}
