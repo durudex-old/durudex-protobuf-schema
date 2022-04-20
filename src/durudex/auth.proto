@@ -51,5 +51,4 @@ message RefreshTokenRequest {
 
 message RefreshTokenResponse {
   string access = 1;
-  string refresh = 2;
 }
