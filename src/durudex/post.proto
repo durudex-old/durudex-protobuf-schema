@@ -40,6 +40,7 @@ message GetPostByIDResponse {
 
 message DeletePostRequest {
   bytes id = 1;
+  bytes author_id = 2;
 }
 
 message DeletePostResponse {}
