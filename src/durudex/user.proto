@@ -9,7 +9,7 @@ syntax = "proto3";
 
 package durudex;
 
-import "google/protobuf/timestamp.proto";
+import "durudex/types/timestamp.proto";
 
 service UserService {
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
@@ -34,8 +34,8 @@ message GetUserByIDRequest {
 
 message GetUserByIDResponse {
   string username = 1;
-  google.protobuf.Timestamp created_at = 2;
-  google.protobuf.Timestamp last_visit = 3;
+  durudex.types.Timestamp created_at = 2;
+  durudex.types.Timestamp last_visit = 3;
   bool verified = 4;
   optional string avatar_url = 5;
 }
@@ -48,8 +48,8 @@ message GetUserByCredsRequest {
 message GetUserByCredsResponse {
   bytes id = 1;
   string email = 2;
-  google.protobuf.Timestamp created_at = 3;
-  google.protobuf.Timestamp last_visit = 4;
+  durudex.types.Timestamp created_at = 3;
+  durudex.types.Timestamp last_visit = 4;
   bool verified = 5;
   optional string avatar_url = 6;
 }
