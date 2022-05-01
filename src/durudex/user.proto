@@ -18,7 +18,7 @@ service UserService {
   rpc ForgotUserPassword(ForgotUserPasswordRequest) returns (ForgotUserPasswordResponse);
   rpc UpdateUserAvatar(UpdateUserAvatarRequest) returns (UpdateUserAvatarResponse);
   rpc CreateUserVerifyEmailCode(CreateUserVerifyEmailCodeRequest) returns (CreateUserVerifyEmailCodeResponse);
-  rpc CheckUserVerifyEmailCode(CheckUserVerifyEmailCodeRequest) returns (CheckUserVerifyEmailCodeResponse);
+  rpc VerifyUserEmailCode(VerifyUserEmailCodeRequest) returns (VerifyUserEmailCodeResponse);
 }
 
 message CreateUserRequest {
@@ -77,11 +77,11 @@ message CreateUserVerifyEmailCodeRequest {
 
 message CreateUserVerifyEmailCodeResponse {}
 
-message CheckUserVerifyEmailCodeRequest {
+message VerifyUserEmailCodeRequest {
   string email = 1;
   string code = 2;
 }
 
-message CheckUserVerifyEmailCodeResponse {
+message VerifyUserEmailCodeResponse {
   bool status = 1;
 }
