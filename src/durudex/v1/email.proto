@@ -1,38 +1,53 @@
-/*
- * Copyright © 2022 Durudex
-
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
+// Copyright © 2022 Durudex
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
 
 syntax = "proto3";
 
 package durudex.v1;
 
+// Durudex Email Service.
 service EmailService {
+  // Sending an email to a user with a verification code.
   rpc SendEmailUserCode(SendEmailUserCodeRequest) returns (SendEmailUserCodeResponse);
+  // Sending an email to a user with logged in.
   rpc SendEmailUserLoggedIn(SendEmailUserLoggedInRequest) returns (SendEmailUserLoggedInResponse);
+  // Sending an email to a user with register.
   rpc SendEmailUserRegister(SendEmailUserRegisterRequest) returns (SendEmailUserRegisterResponse);
 }
 
+// Request to send an email to a user with a verification code.
 message SendEmailUserCodeRequest {
+  // User email address.
   string email = 1;
+  // Username.
   string username = 2;
+  // Verification code.
   uint64 code = 3;
 }
 
+// Response to send an email to a user with a verification code.
 message SendEmailUserCodeResponse {}
 
+// Request to send an email to a user with logged in.
 message SendEmailUserLoggedInRequest {
+  // User email address.
   string email = 1;
+  // User ip address.
   string ip = 2;
 }
 
+// Response to send an email to a user with logged in.
 message SendEmailUserLoggedInResponse {}
 
+// Request to send an email to a user with register.
 message SendEmailUserRegisterRequest {
+  // User email address.
   string email = 1;
+  // Username.
   string username = 2;
 }
 
+// Response to send an email to a user with register.
 message SendEmailUserRegisterResponse {}
