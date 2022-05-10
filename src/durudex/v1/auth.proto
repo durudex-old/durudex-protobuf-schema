@@ -7,7 +7,7 @@
 
 syntax = "proto3";
 
-package durudex;
+package durudex.v1;
 
 service AuthService {
   rpc SignUp(SignUpRequest) returns (SignUpResponse);
