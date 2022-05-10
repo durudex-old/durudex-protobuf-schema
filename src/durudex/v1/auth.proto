@@ -23,7 +23,7 @@ service AuthService {
 message UserSignUpRequest {
   // Unique username.
   string username = 1;
-  // Ununique user email.
+  // Ununique user email address.
   string email = 2;
   // User password.
   string password = 3;
