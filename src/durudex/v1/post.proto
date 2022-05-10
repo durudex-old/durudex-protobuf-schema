@@ -1,9 +1,7 @@
-/*
- * Copyright © 2022 Durudex
-
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
+// Copyright © 2022 Durudex
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
 
 syntax = "proto3";
 
@@ -11,42 +9,66 @@ package durudex.v1;
 
 import "durudex/type/timestamp.proto";
 
+// Durudex Post Service.
 service PostService {
+  // Create a new post.
   rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
-  rpc GetPostByID(GetPostByIDRequest) returns (GetPostByIDResponse);
+  // Get a post by ID.
+  rpc GetPostById(GetPostByIdRequest) returns (GetPostByIdResponse);
+  // Delete a post.
   rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
+  // Update a post.
   rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
 }
 
+// Request for creating a new post.
 message CreatePostRequest {
+  // Post author uuid.
   bytes author_id = 1;
+  // Post text.
   string text = 2;
 }
 
+// Response for creating a new post.
 message CreatePostResponse {
+  // Post uuid.
   bytes id = 1;
 }
 
-message GetPostByIDRequest {
+// Request for getting a post by id.
+message GetPostByIdRequest {
+  // Post uuid.
   bytes id = 1;
 }
 
-message GetPostByIDResponse {
+// Response for getting a post by id.
+message GetPostByIdResponse {
+  // Post author uuid.
   bytes author_id = 1;
+  // Post text.
   string text = 2;
+  // Post creation timestamp.
   durudex.type.Timestamp created_at = 3;
+  // Post update timestamp.
   optional durudex.type.Timestamp updated_at = 4;
 }
 
+// Request for deleting a post.
 message DeletePostRequest {
+  // Post uuid.
   bytes id = 1;
 }
 
+// Response for deleting a post.
 message DeletePostResponse {}
 
+// Request for updating a post.
 message UpdatePostRequest {
+  // Post uuid.
   bytes id = 1;
+  // Post text.
   string text = 3;
 }
 
+// Response for updating a post.
 message UpdatePostResponse {}
