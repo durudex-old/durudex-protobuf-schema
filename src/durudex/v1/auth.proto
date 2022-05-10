@@ -1,54 +1,79 @@
-/*
- * Copyright © 2022 Durudex
-
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
+// Copyright © 2022 Durudex
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
 
 syntax = "proto3";
 
 package durudex.v1;
 
+// Durudex Authorization Service.
 service AuthService {
-  rpc SignUp(SignUpRequest) returns (SignUpResponse);
-  rpc SignIn(SignInRequest) returns (SignInResponse);
-  rpc SignOut(SignOutRequest) returns (SignOutResponse);
-  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+  // User Sign Up.
+  rpc UserSignUp(UserSignUpRequest) returns (UserSignUpResponse);
+  // User Sign In.
+  rpc UserSignIn(UserSignInRequest) returns (UserSignInResponse);
+  // User Sign Out.
+  rpc UserSignOut(UserSignOutRequest) returns (UserSignOutResponse);
+  // Refresh user authentication token.
+  rpc RefreshUserToken(RefreshUserTokenRequest) returns (RefreshUserTokenResponse);
 }
 
-message SignUpRequest {
+// User Sign Up Request.
+message UserSignUpRequest {
+  // Unique username.
   string username = 1;
+  // Ununique user email.
   string email = 2;
+  // User password.
   string password = 3;
 }
 
-message SignUpResponse {
+// User Sign Up Response.
+message UserSignUpResponse {
+  // User uuid.
   bytes id = 1;
 }
 
-message SignInRequest {
+// User Sign In Request.
+message UserSignInRequest {
+  // Username.
   string username = 1;
+  // User password.
   string password = 2;
+  // User ip address.
   string ip = 3;
 }
 
-message SignInResponse {
+// User Sign In Response.
+message UserSignInResponse {
+  // User authentication JWT access token.
   string access = 1;
+  // User authentication refresh token.
   string refresh = 2;
 }
 
-message SignOutRequest {
-  string refresh_token = 1;
+// User Sign Out Request.
+message UserSignOutRequest {
+  // User authentication refresh token.
+  string refresh = 1;
+  // User ip address.
   string ip = 2;
 }
 
-message SignOutResponse {}
+// User Sign Out Response.
+message UserSignOutResponse {}
 
-message RefreshTokenRequest {
-  string refresh_token = 1;
+// Refresh user authentication token request.
+message RefreshUserTokenRequest {
+  // User authentication refresh token.
+  string refresh = 1;
+  // User ip address.
   string ip = 2;
 }
 
-message RefreshTokenResponse {
+// Refresh user authentication token response.
+message RefreshUserTokenResponse {
+  // User authentication JWT access token.
   string access = 1;
 }
