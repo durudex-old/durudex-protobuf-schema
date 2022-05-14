@@ -25,5 +25,3 @@ jobs:
 
       - name: Run Protobuf Lint
         uses: bufbuild/buf-lint-action@v1
-        with:
-          input: 'src'
