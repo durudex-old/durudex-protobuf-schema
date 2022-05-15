@@ -123,7 +123,7 @@ message VerifyUserEmailCodeRequest {
   // User email address.
   string email = 1;
   // User verification code.
-  string code = 2;
+  uint64 code = 2;
 }
 
 // Response for verifying a user email code.
