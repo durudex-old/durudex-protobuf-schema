@@ -9,32 +9,12 @@ package durudex.v1;
 
 // Durudex Authorization Service.
 service AuthService {
-  // User Sign Up.
-  rpc UserSignUp(UserSignUpRequest) returns (UserSignUpResponse);
   // User Sign In.
   rpc UserSignIn(UserSignInRequest) returns (UserSignInResponse);
   // User Sign Out.
   rpc UserSignOut(UserSignOutRequest) returns (UserSignOutResponse);
   // Refresh user authentication token.
   rpc RefreshUserToken(RefreshUserTokenRequest) returns (RefreshUserTokenResponse);
-}
-
-// User Sign Up Request.
-message UserSignUpRequest {
-  // Unique username.
-  string username = 1;
-  // Ununique user email address.
-  string email = 2;
-  // User password.
-  string password = 3;
-  // Verification code.
-  uint64 code = 4;
-}
-
-// User Sign Up Response.
-message UserSignUpResponse {
-  // User uuid.
-  bytes id = 1;
 }
 
 // User Sign In Request.

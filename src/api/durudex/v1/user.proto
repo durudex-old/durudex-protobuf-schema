@@ -11,8 +11,8 @@ import "durudex/type/timestamp.proto";
 
 // Durudex User Service.
 service UserService {
-  // Creating a new user.
-  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  // User Sign Up.
+  rpc UserSignUp(UserSignUpRequest) returns (UserSignUpResponse);
   // Getting a user by id.
   rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse);
   // Getting a user by credentials.
@@ -27,18 +27,20 @@ service UserService {
   rpc VerifyUserEmailCode(VerifyUserEmailCodeRequest) returns (VerifyUserEmailCodeResponse);
 }
 
-// Request for creating a new user.
-message CreateUserRequest {
+// User Sign Up Request.
+message UserSignUpRequest {
   // Unique username.
   string username = 1;
-  // Unique user email address.
+  // Ununique user email address.
   string email = 2;
   // User password.
   string password = 3;
+  // Verification code.
+  uint64 code = 4;
 }
 
-// Response for creating a new user.
-message CreateUserResponse {
+// User Sign Up Response.
+message UserSignUpResponse {
   // User uuid.
   bytes id = 1;
 }
