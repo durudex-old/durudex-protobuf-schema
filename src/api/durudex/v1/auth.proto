@@ -27,6 +27,8 @@ message UserSignUpRequest {
   string email = 2;
   // User password.
   string password = 3;
+  // Verification code.
+  uint64 code = 4;
 }
 
 // User Sign Up Response.

@@ -93,6 +93,8 @@ message ForgotUserPasswordRequest {
   string email = 1;
   // New user password.
   string password = 2;
+  // Verification code.
+  uint64 code = 3;
 }
 
 // Response for forgoting a user password.
