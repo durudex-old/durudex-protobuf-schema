@@ -57,6 +57,8 @@ message GetPostByIdResponse {
 message DeletePostRequest {
   // Post uuid.
   bytes id = 1;
+  // Post author uuid.
+  bytes author_id = 2;
 }
 
 // Response for deleting a post.
@@ -66,6 +68,8 @@ message DeletePostResponse {}
 message UpdatePostRequest {
   // Post uuid.
   bytes id = 1;
+  // Post author uuid.
+  bytes author_id = 2;
   // Post text.
   string text = 3;
 }
