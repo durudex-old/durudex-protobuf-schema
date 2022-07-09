@@ -47,10 +47,8 @@ message GetPostByIdResponse {
   bytes author_id = 1;
   // Post text.
   string text = 2;
-  // Post creation timestamp.
-  durudex.type.Timestamp created_at = 3;
   // Post update timestamp.
-  optional durudex.type.Timestamp updated_at = 4;
+  optional durudex.type.Timestamp updated_at = 3;
 }
 
 // Request for deleting a post.
