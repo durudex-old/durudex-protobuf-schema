@@ -15,5 +15,14 @@
 
 <h1 align="center">Durudex Protobuf Schema</h1>
 
+# Type Schema
+
+If you use [buf.build](https://docs.buf.build/introduction) then you can add our proto files as follows:
+
+```yml
+deps:
+  - buf.build/durudex/type
+```
+
 ## ⚠️ License
 Copyright © 2022 [Durudex](https://github.com/durudex). Released under the MIT license.
