@@ -29,12 +29,16 @@ message UserSignUpRequest {
   string password = 3;
   // Verification code.
   uint64 code = 4;
+  // User ip address.
+  string ip = 5;
 }
 
 // User Sign Up Response.
 message UserSignUpResponse {
-  // User uuid.
-  bytes id = 1;
+  // User authentication JWT access token.
+  string access = 1;
+  // User authorization refresh token.
+  string refresh = 2;
 }
 
 // User Sign In Request.
@@ -51,7 +55,7 @@ message UserSignInRequest {
 message UserSignInResponse {
   // User authentication JWT access token.
   string access = 1;
-  // User authentication refresh token.
+  // User authorization refresh token.
   string refresh = 2;
 }
 
