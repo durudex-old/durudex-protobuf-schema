@@ -1,0 +1,39 @@
+// Copyright © 2022 Durudex
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+
+syntax = "proto3";
+
+package durudex.v1;
+
+// Durudex User Code Service.
+service UserCodeService {
+  // Creating a new user verification code.
+  rpc CreateVerifyUserEmailCode(CreateVerifyUserEmailCodeRequest) returns (CreateVerifyUserEmailCodeResponse);
+  // Verifying a user email code.
+  rpc VerifyUserEmailCode(VerifyUserEmailCodeRequest) returns (VerifyUserEmailCodeResponse);
+}
+
+// Request for creating a new user verification code.
+message CreateVerifyUserEmailCodeRequest {
+  // User email address.
+  string email = 1;
+}
+
+// Response for creating a new user verification code.
+message CreateVerifyUserEmailCodeResponse {}
+
+// Request for verifying a user email code.
+message VerifyUserEmailCodeRequest {
+  // User email address.
+  string email = 1;
+  // User verification code.
+  uint64 code = 2;
+}
+
+// Response for verifying a user email code.
+message VerifyUserEmailCodeResponse {
+  // Verified code status.
+  bool status = 1;
+}

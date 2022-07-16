@@ -19,10 +19,6 @@ service UserService {
   rpc ForgotUserPassword(ForgotUserPasswordRequest) returns (ForgotUserPasswordResponse);
   // Updating a user avatar.
   rpc UpdateUserAvatar(UpdateUserAvatarRequest) returns (UpdateUserAvatarResponse);
-  // Creatinf a new user verification code.
-  rpc CreateVerifyUserEmailCode(CreateVerifyUserEmailCodeRequest) returns (CreateVerifyUserEmailCodeResponse);
-  // Verifying a user email code.
-  rpc VerifyUserEmailCode(VerifyUserEmailCodeRequest) returns (VerifyUserEmailCodeResponse);
 }
 
 // Request for getting a user by id.
@@ -88,26 +84,3 @@ message UpdateUserAvatarRequest {
 
 // Response for updating a user avatar.
 message UpdateUserAvatarResponse {}
-
-// Request for creating a new user verification code.
-message CreateVerifyUserEmailCodeRequest {
-  // User email address.
-  string email = 1;
-}
-
-// Response for creating a new user verification code.
-message CreateVerifyUserEmailCodeResponse {}
-
-// Request for verifying a user email code.
-message VerifyUserEmailCodeRequest {
-  // User email address.
-  string email = 1;
-  // User verification code.
-  uint64 code = 2;
-}
-
-// Response for verifying a user email code.
-message VerifyUserEmailCodeResponse {
-  // Verified code status.
-  bool status = 1;
-}
