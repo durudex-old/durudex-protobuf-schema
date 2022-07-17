@@ -7,8 +7,8 @@ syntax = "proto3";
 
 package durudex.v1;
 
-// Durudex Email Service.
-service EmailService {
+// Durudex Email User Service.
+service EmailUserService {
   // Sending an email to a user with a verification code.
   rpc SendEmailUserCode(SendEmailUserCodeRequest) returns (SendEmailUserCodeResponse);
   // Sending an email to a user with logged in.
