@@ -15,10 +15,24 @@ service PostService {
   rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
   // Get a post by ID.
   rpc GetPostById(GetPostByIdRequest) returns (GetPostByIdResponse);
+  // Getting author posts.
+  rpc GetAuthorPosts(GetAuthorPostsRequest) returns (GetAuthorPostsResponse);
   // Delete a post.
   rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
   // Update a post.
   rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
+}
+
+// Post message.
+message Post {
+  // Post ksuid.
+  bytes id = 1;
+  // Post author ksuid.
+  bytes author_id = 2;
+  // Post text.
+  string text = 3;
+  // Post update timestamp.
+  optional durudex.type.Timestamp updated_at = 4;
 }
 
 // Request for creating a new post.
@@ -49,6 +63,22 @@ message GetPostByIdResponse {
   string text = 2;
   // Post update timestamp.
   optional durudex.type.Timestamp updated_at = 3;
+}
+
+// Request for getting author posts.
+message GetAuthorPostsRequest {
+  // Post author ksuid.
+  bytes author_id = 1;
+  // First post filter.
+  optional int32 first = 2;
+  // Last post filter.
+  optional int32 last = 3;
+}
+
+// Response for getting author posts.
+message GetAuthorPostsResponse {
+  // Author posts.
+  repeated Post posts = 1;
 }
 
 // Request for deleting a post.
