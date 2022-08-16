@@ -13,10 +13,10 @@ import "durudex/type/timestamp.proto";
 service PostService {
   // Create a new post.
   rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
-  // Get a post by ID.
-  rpc GetPostById(GetPostByIdRequest) returns (GetPostByIdResponse);
-  // Getting author posts.
-  rpc GetAuthorPosts(GetAuthorPostsRequest) returns (GetAuthorPostsResponse);
+  // Getting a post.
+  rpc GetPost(GetPostRequest) returns (GetPostResponse);
+  // Getting a posts.
+  rpc GetPosts(GetPostsRequest) returns (GetPostsResponse);
   // Delete a post.
   rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
   // Update a post.
@@ -28,11 +28,23 @@ message Post {
   // Post ksuid.
   bytes id = 1;
   // Post author ksuid.
-  bytes author_id = 2;
+  optional bytes author_id = 2;
   // Post text.
   string text = 3;
   // Post update timestamp.
   optional durudex.type.Timestamp updated_at = 4;
+}
+
+// Query sort options.
+message SortOptions {
+  // First filter.
+  optional int32 first = 1;
+  // Last filter.
+  optional int32 last = 2;
+  // Before filter.
+  optional bytes before  = 3;
+  // After filter.
+  optional bytes after = 4;
 }
 
 // Request for creating a new post.
@@ -49,14 +61,14 @@ message CreatePostResponse {
   bytes id = 1;
 }
 
-// Request for getting a post by id.
-message GetPostByIdRequest {
+// Request for getting a post.
+message GetPostRequest {
   // Post ksuid.
   bytes id = 1;
 }
 
-// Response for getting a post by id.
-message GetPostByIdResponse {
+// Response for getting a post.
+message GetPostResponse {
   // Post author ksuid.
   bytes author_id = 1;
   // Post text.
@@ -65,18 +77,16 @@ message GetPostByIdResponse {
   optional durudex.type.Timestamp updated_at = 3;
 }
 
-// Request for getting author posts.
-message GetAuthorPostsRequest {
+// Request for getting a posts.
+message GetPostsRequest {
   // Post author ksuid.
   bytes author_id = 1;
-  // First post filter.
-  optional int32 first = 2;
-  // Last post filter.
-  optional int32 last = 3;
+  // Query sort options.
+  SortOptions sort_options = 2;
 }
 
-// Response for getting author posts.
-message GetAuthorPostsResponse {
+// Response for getting a posts.
+message GetPostsResponse {
   // Author posts.
   repeated Post posts = 1;
 }
