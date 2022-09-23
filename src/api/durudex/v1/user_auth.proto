@@ -27,10 +27,12 @@ message UserSignUpRequest {
   string email = 2;
   // User password.
   string password = 3;
+  // Client secret key.
+  string secret = 4;
   // Verification code.
-  uint64 code = 4;
+  uint64 code = 5;
   // User ip address.
-  string ip = 5;
+  string ip = 6;
 }
 
 // User Sign Up Response.
@@ -47,8 +49,10 @@ message UserSignInRequest {
   string username = 1;
   // User password.
   string password = 2;
+  // Client secret key.
+  string secret = 3;
   // User ip address.
-  string ip = 3;
+  string ip = 4;
 }
 
 // User Sign In Response.
@@ -63,8 +67,10 @@ message UserSignInResponse {
 message UserSignOutRequest {
   // User authentication refresh token.
   string refresh = 1;
+  // Client secret key.
+  string secret = 2;
   // User ip address.
-  string ip = 2;
+  string ip = 3;
 }
 
 // User Sign Out Response.
@@ -74,8 +80,10 @@ message UserSignOutResponse {}
 message RefreshUserTokenRequest {
   // User authentication refresh token.
   string refresh = 1;
+  // Client secret key.
+  string secret = 2;
   // User ip address.
-  string ip = 2;
+  string ip = 3;
 }
 
 // Refresh user authentication token response.
