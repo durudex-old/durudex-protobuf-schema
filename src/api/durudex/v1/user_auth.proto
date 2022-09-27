@@ -69,8 +69,6 @@ message UserSignOutRequest {
   string refresh = 1;
   // Client secret key.
   string secret = 2;
-  // User ip address.
-  string ip = 3;
 }
 
 // User Sign Out Response.
@@ -82,8 +80,6 @@ message RefreshUserTokenRequest {
   string refresh = 1;
   // Client secret key.
   string secret = 2;
-  // User ip address.
-  string ip = 3;
 }
 
 // Refresh user authentication token response.
