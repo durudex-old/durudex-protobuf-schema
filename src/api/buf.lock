@@ -4,4 +4,4 @@ deps:
   - remote: buf.build
     owner: durudex
     repository: type
-    commit: f4dfec51ad2a442da72d9572e7d8123b
+    commit: c1940ef812ef4235939b92a20a32c696

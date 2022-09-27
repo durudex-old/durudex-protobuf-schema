@@ -35,13 +35,13 @@ message CreateUserRequest {
 
 // Response for creating a new user.
 message CreateUserResponse {
-  // User ksuid.
+  // User id.
   bytes id = 1;
 }
 
 // Request for getting a user by id.
 message GetUserByIdRequest {
-  // User ksuid.
+  // User id.
   bytes id = 1;
 }
 
@@ -67,7 +67,7 @@ message GetUserByCredsRequest {
 
 // Response for getting a user by credentials.
 message GetUserByCredsResponse {
-  // User ksuid.
+  // User id.
   bytes id = 1;
   // User email address.
   string email = 2;
@@ -94,7 +94,7 @@ message ForgotUserPasswordResponse {}
 
 // Request for updating a user avatar.
 message UpdateUserAvatarRequest {
-  // User ksuid.
+  // User id.
   bytes id = 1;
   // User avatar url.
   string avatar_url = 2;

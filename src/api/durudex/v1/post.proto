@@ -8,6 +8,7 @@ syntax = "proto3";
 package durudex.v1;
 
 import "durudex/type/timestamp.proto";
+import "durudex/type/sort_option.proto";
 
 // Durudex Post Service.
 service PostService {
@@ -27,9 +28,9 @@ service PostService {
 
 // Post message.
 message Post {
-  // Post ksuid.
+  // Post id.
   bytes id = 1;
-  // Post author ksuid.
+  // Post author id.
   optional bytes author_id = 2;
   // Post text.
   string text = 3;
@@ -37,21 +38,9 @@ message Post {
   optional durudex.type.Timestamp updated_at = 4;
 }
 
-// Query sort options.
-message SortOptions {
-  // First option.
-  optional int32 first = 1;
-  // Last option.
-  optional int32 last = 2;
-  // Before option.
-  optional bytes before  = 3;
-  // After option.
-  optional bytes after = 4;
-}
-
 // Request for creating a new post.
 message CreatePostRequest {
-  // Post author ksuid.
+  // Post author id.
   bytes author_id = 1;
   // Post text.
   string text = 2;
@@ -59,19 +48,19 @@ message CreatePostRequest {
 
 // Response for creating a new post.
 message CreatePostResponse {
-  // Post ksuid.
+  // Post id.
   bytes id = 1;
 }
 
 // Request for getting a post.
 message GetPostRequest {
-  // Post ksuid.
+  // Post id.
   bytes id = 1;
 }
 
 // Response for getting a post.
 message GetPostResponse {
-  // Post author ksuid.
+  // Post author id.
   bytes author_id = 1;
   // Post text.
   string text = 2;
@@ -81,10 +70,10 @@ message GetPostResponse {
 
 // Request for getting a posts.
 message GetPostsRequest {
-  // Post author ksuid.
+  // Post author id.
   bytes author_id = 1;
   // Query sort options.
-  SortOptions sort_options = 2;
+  durudex.type.SortOptions sort_options = 2;
 }
 
 // Response for getting a posts.
@@ -95,9 +84,9 @@ message GetPostsResponse {
 
 // Request for deleting a post.
 message DeletePostRequest {
-  // Post ksuid.
+  // Post id.
   bytes id = 1;
-  // Post author ksuid.
+  // Post author id.
   bytes author_id = 2;
 }
 
@@ -106,9 +95,9 @@ message DeletePostResponse {}
 
 // Request for updating a post.
 message UpdatePostRequest {
-  // Post ksuid.
+  // Post id.
   bytes id = 1;
-  // Post author ksuid.
+  // Post author id.
   bytes author_id = 2;
   // Post text.
   string text = 3;
@@ -119,7 +108,7 @@ message UpdatePostResponse {}
 
 // Request for getting total posts count.
 message GetTotalPostsCountRequest {
-  // Post author ksuid.
+  // Post author id.
   bytes author_id = 1;
 }
 

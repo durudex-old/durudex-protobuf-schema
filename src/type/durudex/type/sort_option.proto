@@ -9,10 +9,14 @@ package durudex.type;
 
 option go_package = "github.com/durudex/go-protobuf-type/pbtype";
 
-// Timestamp.
-message Timestamp {
-  // Seconds of UTC time since Unix epoch.
-  int64 seconds = 1;
-  // A second at nanosecond resolution.
-  int32 nanos = 2;
+// Query sort options.
+message SortOptions {
+  // First option.
+  optional int32 first = 1;
+  // Last option.
+  optional int32 last = 2;
+  // Before option.
+  optional bytes before  = 3;
+  // After option.
+  optional bytes after = 4;
 }
