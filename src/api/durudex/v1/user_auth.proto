@@ -30,6 +30,18 @@ service UserAuthService {
   rpc GetTotalUserSessionCount(GetTotalUserSessionCountRequest) returns (GetTotalUserSessionCountResponse);
 }
 
+// User session message.
+message UserSession {
+  // Session id.
+  bytes id = 1;
+  // Session user id.
+  optional bytes user_id = 2;
+  // Session ip address.
+  string ip = 3;
+  // Session expires in.
+  durudex.type.Timestamp expires_in = 4;
+}
+
 // User Sign Up Request.
 message UserSignUpRequest {
   // Unique username.
@@ -125,12 +137,8 @@ message GetUserSessionsRequest {
 
 // Getting a user sessions response.
 message GetUserSessionsResponse {
-  // Session id.
-  bytes id = 1;
-  // Session ip address.
-  string ip = 2;
-  // Session expires in.
-  durudex.type.Timestamp expires_in = 3;
+  // User sessions.
+  repeated UserSession sessions = 1;
 }
 
 // Deleting a user session request.
