@@ -1,0 +1,88 @@
+// Copyright © 2022 Durudex
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+
+syntax = "proto3";
+
+package durudex.v1;
+
+import "durudex/type/timestamp.proto";
+import "durudex/type/sort_option.proto";
+
+// Durudex User Session Service.
+service UserSessionService {
+  // Getting a user session.
+  rpc GetUserSession(GetUserSessionRequest) returns (GetUserSessionResponse);
+  // Getting a user sessions.
+  rpc GetUserSessions(GetUserSessionsRequest) returns (GetUserSessionsResponse);
+  // Deleting a user session.
+  rpc DeleteUserSession(DeleteUserSessionRequest) returns (DeleteUserSessionResponse);
+  // Getting total user session count.
+  rpc GetTotalUserSessionCount(GetTotalUserSessionCountRequest) returns (GetTotalUserSessionCountResponse);
+}
+
+// User session message.
+message UserSession {
+  // Session id.
+  bytes id = 1;
+  // Session user id.
+  optional bytes user_id = 2;
+  // Session ip address.
+  string ip = 3;
+  // Session expires in.
+  durudex.type.Timestamp expires_in = 4;
+}
+
+// Getting a user session request.
+message GetUserSessionRequest {
+  // Session id.
+  bytes id = 1;
+  // Session user id.
+  bytes user_id = 2;
+}
+
+// Getting a user session response.
+message GetUserSessionResponse {
+  // Session ip address.
+  string ip = 1;
+  // Session expires in.
+  durudex.type.Timestamp expires_in = 2;
+}
+
+// Getting a user sessions request.
+message GetUserSessionsRequest {
+  // Session user id.
+  bytes user_id = 1;
+  // Query sort options.
+  durudex.type.SortOptions sort_options = 2;
+}
+
+// Getting a user sessions response.
+message GetUserSessionsResponse {
+  // User sessions.
+  repeated UserSession sessions = 1;
+}
+
+// Deleting a user session request.
+message DeleteUserSessionRequest {
+  // Session id.
+  bytes id = 1;
+  // Session user id.
+  bytes user_id = 2;
+}
+
+// Deleting a user session response.
+message DeleteUserSessionResponse {}
+
+// Getting total session count request.
+message GetTotalUserSessionCountRequest {
+  // Session user id.
+  bytes user_id = 1;
+}
+
+// Getting total session count response.
+message GetTotalUserSessionCountResponse {
+  // User session count.
+  int32 count = 1;
+}

@@ -7,39 +7,14 @@ syntax = "proto3";
 
 package durudex.v1;
 
-import "durudex/type/timestamp.proto";
-import "durudex/type/sort_option.proto";
-
 // Durudex User Authorization Service.
 service UserAuthService {
   // User Sign Up.
   rpc UserSignUp(UserSignUpRequest) returns (UserSignUpResponse);
   // User Sign In.
   rpc UserSignIn(UserSignInRequest) returns (UserSignInResponse);
-  // User Sign Out.
-  rpc UserSignOut(UserSignOutRequest) returns (UserSignOutResponse);
   // Refresh user authentication token.
   rpc RefreshUserToken(RefreshUserTokenRequest) returns (RefreshUserTokenResponse);
-  // Getting a user session.
-  rpc GetUserSession(GetUserSessionRequest) returns (GetUserSessionResponse);
-  // Getting a user sessions.
-  rpc GetUserSessions(GetUserSessionsRequest) returns (GetUserSessionsResponse);
-  // Deleting a user session.
-  rpc DeleteUserSession(DeleteUserSessionRequest) returns (DeleteUserSessionResponse);
-  // Getting total user session count.
-  rpc GetTotalUserSessionCount(GetTotalUserSessionCountRequest) returns (GetTotalUserSessionCountResponse);
-}
-
-// User session message.
-message UserSession {
-  // Session id.
-  bytes id = 1;
-  // Session user id.
-  optional bytes user_id = 2;
-  // Session ip address.
-  string ip = 3;
-  // Session expires in.
-  durudex.type.Timestamp expires_in = 4;
 }
 
 // User Sign Up Request.
@@ -86,17 +61,6 @@ message UserSignInResponse {
   string refresh = 2;
 }
 
-// User Sign Out Request.
-message UserSignOutRequest {
-  // User authentication refresh token.
-  string refresh = 1;
-  // Client secret key.
-  string secret = 2;
-}
-
-// User Sign Out Response.
-message UserSignOutResponse {}
-
 // Refresh user authentication token request.
 message RefreshUserTokenRequest {
   // User authentication refresh token.
@@ -109,57 +73,4 @@ message RefreshUserTokenRequest {
 message RefreshUserTokenResponse {
   // User authentication JWT access token.
   string access = 1;
-}
-
-// Getting a user session request.
-message GetUserSessionRequest {
-  // Session id.
-  bytes id = 1;
-  // Session user id.
-  bytes user_id = 2;
-}
-
-// Getting a user session response.
-message GetUserSessionResponse {
-  // Session ip address.
-  string ip = 1;
-  // Session expires in.
-  durudex.type.Timestamp expires_in = 2;
-}
-
-// Getting a user sessions request.
-message GetUserSessionsRequest {
-  // Session user id.
-  bytes user_id = 1;
-  // Query sort options.
-  durudex.type.SortOptions sort_options = 2;
-}
-
-// Getting a user sessions response.
-message GetUserSessionsResponse {
-  // User sessions.
-  repeated UserSession sessions = 1;
-}
-
-// Deleting a user session request.
-message DeleteUserSessionRequest {
-  // User authentication refresh token.
-  string refresh = 1;
-  // Client secret key.
-  string secret = 2;
-}
-
-// Deleting a user session response.
-message DeleteUserSessionResponse {}
-
-// Getting total session count request.
-message GetTotalUserSessionCountRequest {
-  // Session user id.
-  bytes user_id = 1;
-}
-
-// Getting total session count response.
-message GetTotalUserSessionCountResponse {
-  // User session count.
-  int32 count = 1;
 }
