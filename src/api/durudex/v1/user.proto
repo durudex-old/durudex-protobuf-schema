@@ -7,98 +7,137 @@ syntax = "proto3";
 
 package durudex.v1;
 
-import "durudex/type/timestamp.proto";
-
-// Durudex User Service.
+// UserService service stores methods for working with the user service.
 service UserService {
-  // Creating a new user.
+  // CreateUser creates a new user on the Durudex network.
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
-  // Getting a user by id.
-  rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse);
-  // Getting a user by credentials.
-  rpc GetUserByCreds(GetUserByCredsRequest) returns (GetUserByCredsResponse);
-  // Forgoting a user password.
+
+  // GetPublicUser returns the user's public data.
+  rpc GetPublicUser(GetPublicUserRequest) returns (GetPublicUserResponse);
+
+  // GetPrivateUser returns the user's private data.
+  rpc GetPrivateUser(GetPrivateUserRequest) returns (GetPrivateUserResponse);
+
+  // ForgotUserPassword changes the user's password to a new one.
   rpc ForgotUserPassword(ForgotUserPasswordRequest) returns (ForgotUserPasswordResponse);
-  // Updating a user avatar.
-  rpc UpdateUserAvatar(UpdateUserAvatarRequest) returns (UpdateUserAvatarResponse);
 }
 
-// Request to creating a new user.
+// UserLoginType stores all user login types.
+enum UserLoginType {
+  USER_LOGIN_TYPE_UNSPECIFIED = 0;
+
+  // USER_LOGIN_TYPE_ID user login type used to indicate the ID value.
+  USER_LOGIN_TYPE_ID = 1;
+
+  // USER_LOGIN_TYPE_USERNAME user login type used to indicate the username value.
+  USER_LOGIN_TYPE_USERNAME = 2;
+
+  // USER_LOGIN_TYPE_EMAIL user login type used to indicate the email address value.
+  USER_LOGIN_TYPE_EMAIL = 3;
+}
+
+// UserLogin message stores the user's login.
+message UserLogin {
+  // `login_type` field stores the user's login type.
+  UserLoginType login_type = 1;
+
+  oneof login {
+    // `bytes_value` field stores the user login value in bytes.
+    bytes bytes_value = 2;
+
+    // `string_value` field stores the user login value in string.
+    string string_value = 3;
+  }
+}
+
+// CreateUserRequest request message of the CreateUser method.
 message CreateUserRequest {
-  // Unique username.
+  // `username` field stores the unique username that will be used to create a new user.
   string username = 1;
-  // Ununique user email address.
+
+  // `email' field stores the unique email address that will be used to create a new user.
   string email = 2;
-  // User password.
+
+  // `password` field stores the client-hashed of the user's password that will be used to create a new user.
   string password = 3;
 }
 
-// Response for creating a new user.
+// CreateUserResponse response message of the CreateUser method.
 message CreateUserResponse {
-  // User id.
+  // `id` field stores the KSUID of the newly created user.
   bytes id = 1;
 }
 
-// Request for getting a user by id.
-message GetUserByIdRequest {
-  // User id.
-  bytes id = 1;
+// GetPublicUserRequest request message of the GetPublicUser method.
+message GetPublicUserRequest {
+  // `login' field stores the user's login, which will be used to obtain the user's public data.
+  UserLogin login = 1;
 }
 
-// Response for getting a user by id.
-message GetUserByIdResponse {
-  // Username.
-  string username = 1;
-  // User last visited timestamp.
-  durudex.type.Timestamp last_visit = 2;
-  // User verified status.
+// GetPublicUserResponse response message of the GetPublicUser method.
+message GetPublicUserResponse {
+  // `id` field stores the KSUID user ID.
+  bytes id = 1;
+
+  // `username` field stores the username on the Durudex network.
+  string username = 2;
+
+  // `verified' field stores the user's verification status.
   bool verified = 3;
-  // User avatar url.
-  optional string avatar_url = 4;
+
+  // `avatar_url` field stores a url to the user's avatar.
+  string avatar_url = 4;
 }
 
-// Request for getting a user by credentials.
-message GetUserByCredsRequest {
-  // Username.
-  string username = 1;
-  // User password.
+// GetPrivateUserRequest request message of the GetPrivateUser method.
+message GetPrivateUserRequest {
+  // `login' field stores the user's login, which will be used to obtain the user's private data.
+  UserLogin login = 1;
+
+  // `password` field stores the client-hashed of the user's password, which will be used
+  // to obtain the user's private data.
   string password = 2;
 }
 
-// Response for getting a user by credentials.
-message GetUserByCredsResponse {
-  // User id.
+// GetPrivateUserResponse response message of the GetPrivateUser method.
+message GetPrivateUserResponse {
+  // `id` field stores the KSUID user ID.
   bytes id = 1;
-  // User email address.
-  string email = 2;
-  // User last visited timestamp.
-  durudex.type.Timestamp last_visit = 3;
-  // User verified status.
-  bool verified = 4;
-  // User avatar url.
-  optional string avatar_url = 5;
+
+  // `username` field stores the username on the Durudex network.
+  string username = 2;
+
+  // `email' field stores the user's email address.
+  string email = 3;
+
+  // `password_hash` field stores the server-hashed password of the user's.
+  string password_hash = 4;
+
+  // `password_epoch` field stores the epoch number of the hash of the user's password.
+  int32 password_epoch = 5;
+
+  // `verified' field stores the user's verification status.
+  bool verified = 6;
+
+  // `avatar_url` field stores a url to the user's avatar.
+  string avatar_url = 7;
 }
 
-// Request for forgoting a user password.
+// ForgotUserPasswordRequest request message of the ForgotUserPassword method.
 message ForgotUserPasswordRequest {
-  // User email address.
-  string email = 1;
-  // New user password.
-  string password = 2;
-  // Verification code.
+  // `login` field stores the user's login, which will be used to change the user's password.
+  UserLogin login = 1;
+
+  // `new_password` field stores the client-hashed new password of the user's, which will be
+  // used to change the user's password.
+  string new_password = 2;
+
+  // `code` field stores the user's verification code, which will be used to change the user's password.
   uint64 code = 3;
 }
 
-// Response for forgoting a user password.
-message ForgotUserPasswordResponse {}
-
-// Request for updating a user avatar.
-message UpdateUserAvatarRequest {
-  // User id.
-  bytes id = 1;
-  // User avatar url.
-  string avatar_url = 2;
+// ForgotUserPasswordResponse response message of the ForgotUserPassword method.
+message ForgotUserPasswordResponse {
+  // `password_epoch` field stores the epoch number of the hash of the user's password.
+  int32 password_epoch = 1;
 }
-
-// Response for updating a user avatar.
-message UpdateUserAvatarResponse {}
