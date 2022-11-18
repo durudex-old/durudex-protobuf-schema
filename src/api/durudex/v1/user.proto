@@ -53,13 +53,16 @@ message UserLogin {
 // CreateUserRequest request message of the CreateUser method.
 message CreateUserRequest {
   // `username` field stores the unique username that will be used to create a new user.
-  string username = 1;
+  optional string username = 1;
+
+  // `name` field stores the name that will be used to create a new user.
+  string name = 2;
 
   // `email' field stores the unique email address that will be used to create a new user.
-  string email = 2;
+  string email = 3;
 
   // `password` field stores the client-hashed of the user's password that will be used to create a new user.
-  string password = 3;
+  string password = 4;
 }
 
 // CreateUserResponse response message of the CreateUser method.
@@ -80,13 +83,16 @@ message GetPublicUserResponse {
   bytes id = 1;
 
   // `username` field stores the username on the Durudex network.
-  string username = 2;
+  optional string username = 2;
+
+  // `name` field stores the full name of the user.
+  string name = 3;
 
   // `verified' field stores the user's verification status.
-  bool verified = 3;
+  bool verified = 4;
 
   // `avatar_url` field stores a url to the user's avatar.
-  string avatar_url = 4;
+  optional string avatar_url = 5;
 }
 
 // GetPrivateUserRequest request message of the GetPrivateUser method.
@@ -105,22 +111,25 @@ message GetPrivateUserResponse {
   bytes id = 1;
 
   // `username` field stores the username on the Durudex network.
-  string username = 2;
+  optional string username = 2;
+
+  // `name` field stores the full name of the user.
+  string name = 3;
 
   // `email' field stores the user's email address.
-  string email = 3;
+  string email = 4;
 
   // `password_hash` field stores the server-hashed password of the user's.
-  string password_hash = 4;
+  string password_hash = 5;
 
   // `password_epoch` field stores the epoch number of the hash of the user's password.
-  int32 password_epoch = 5;
+  int32 password_epoch = 6;
 
   // `verified' field stores the user's verification status.
-  bool verified = 6;
+  bool verified = 7;
 
   // `avatar_url` field stores a url to the user's avatar.
-  string avatar_url = 7;
+  optional string avatar_url = 8;
 }
 
 // ForgotUserPasswordRequest request message of the ForgotUserPassword method.
