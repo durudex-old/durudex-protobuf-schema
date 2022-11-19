@@ -1,0 +1,42 @@
+// Copyright © 2022 Durudex
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+
+syntax = "proto3";
+
+package durudex.v1;
+
+// CodeService service stores methods for working with the code service.
+service CodeService {
+  // CreateEmailCode creates a new verification code that will be sent to an email address.
+  rpc CreateEmailCode(CreateEmailCodeRequest) returns (CreateEmailCodeResponse);
+
+  // VerifyEmailCode verifies the verification code that was sent to the email address.
+  rpc VerifyEmailCode(VerifyEmailCodeRequest) returns (VerifyEmailCodeResponse);
+}
+
+// CreateEmailCodeRequest request message of the CreateEmailCode method.
+message CreateEmailCodeRequest {
+  // `email' field stores the email address to which the verification code will be sent.
+  string email = 1;
+}
+
+// CreateEmailCodeResponse response message of the CreateEmailCode method.
+message CreateEmailCodeResponse {}
+
+// VerifyEmailCodeRequest request message of the VerifyEmailCode method.
+message VerifyEmailCodeRequest {
+  // `email' field stores the email address to which the verification code was sent.
+  string email = 1;
+
+  // `code` field stores the verification code that needs to be compared with the one
+  // sent to the email address.
+  uint64 code = 2;
+}
+
+// VerifyEmailCodeResponse response message of the VerifyEmailCode method.
+message VerifyEmailCodeResponse {
+  // `status' field stores the similarity status of the verification codes.
+  bool status = 1;
+}
